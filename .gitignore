@@ -1,0 +1,53 @@
+
+# Ambiente virtual
+venv/
+.venv/
+env/
+
+# Variáveis de ambiente e credenciais
+.env
+.env.*
+!.env.example
+
+# Cache do Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Testes e cobertura
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Logs
+*.log
+logs/
+
+# Bancos de dados locais
+*.db
+*.sqlite3
+
+# Migrações: manter os arquivos de estrutura do banco
+# Não ignorar a pasta alembic/versions/
+
+# IDEs e editores
+.vscode/
+.idea/
+
+# Sistema operacional
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Arquivos temporários
+*.tmp
+*.bak
+
+# Distribuição e pacotes
+build/
+dist/
+*.egg-info/
+
+# Type checking
+.mypy_cache/
+.pyright/
