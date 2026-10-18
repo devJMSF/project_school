@@ -21,7 +21,7 @@ def obter_db():
 DbSession = Annotated[Session, Depends(obter_db)]
 
 @router.get("/", response_model=list[AlunoResponse])
-def listar(db: Session):
+def listar(db: DbSession):
     return service.listar_alunos(db)
 
 @router.get("/{aluno_id}", response_model=AlunoResponse)
@@ -38,7 +38,7 @@ def buscar(aluno_id: int, db: DbSession):
 
 @router.post("/", response_model=AlunoResponse)
 def criar(dados: AlunoCreate, db: DbSession):
-    return service.criar_aluno(db, dados)
+    return service.criar_aluno(db, dados.model_dump())
 
 
 @router.patch("/", response_model=AlunoResponse)
