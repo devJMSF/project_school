@@ -38,7 +38,7 @@ def buscar(aluno_id: int, db: DbSession):
 
 @router.post("/", response_model=AlunoResponse)
 def criar(dados: AlunoCreate, db: DbSession):
-    return service.criar_aluno(db, dados.model_dump())
+    return service.criar_aluno(db, dados)
 
 
 @router.patch("/", response_model=AlunoResponse)

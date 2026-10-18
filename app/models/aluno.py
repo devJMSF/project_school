@@ -1,7 +1,7 @@
-from sqlalchemy import String, Date
+from sqlalchemy import String, DateTime, Date
 from sqlalchemy.orm import Mapped, mapped_column
 from app.database.config import Base
-from datetime import date
+from datetime import datetime, date
 
 class Aluno(Base):
 
@@ -31,13 +31,13 @@ class Aluno(Base):
         nullable=False
         )
     
-    celular: Mapped[str] = mapped_column(
+    telefone: Mapped[str] = mapped_column(
         String(11), 
-        unique=True,
         nullable=False
         ) 
     
-    data_cadastro: Mapped[date] = mapped_column(
-        Date,
+    data_cadastro: Mapped[datetime] = mapped_column(
+        DateTime,
+        default=datetime.now,
         nullable=False
         )
