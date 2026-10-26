@@ -2,6 +2,7 @@ from app.database.config import Base, engine
 from app.routers.aluno import router_alunos
 from app.routers.disciplina import router_disciplina
 from app.routers.professor import router_professor
+from app.routers.turma import router_turma
 from contextlib import asynccontextmanager
 from fastapi import FastAPI
 
@@ -20,6 +21,7 @@ app = FastAPI(
 app.include_router(router_alunos)
 app.include_router(router_disciplina)
 app.include_router(router_professor)
+app.include_router(router_turma)
 
 @app.get("/")
 def home():
