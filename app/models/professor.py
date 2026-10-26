@@ -5,6 +5,8 @@ from datetime import date
 
 class Professor(Base):
 
+    __tablename__ = 'professores'
+
     id: Mapped[int] = mapped_column(primary_key=True)
 
     nome: Mapped[str] = mapped_column(

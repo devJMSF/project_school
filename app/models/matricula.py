@@ -26,7 +26,8 @@ class Matricula(Base):
     
     data_matricula: Mapped[date] = mapped_column(
         Date, 
-        nullable=False)
+        nullable=False,
+        default=date.today)
     
     status: Mapped[str] = mapped_column(
         String(20), 
