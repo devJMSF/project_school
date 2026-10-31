@@ -1,6 +1,8 @@
 
 from sqlalchemy import create_engine
-from sqlalchemy.orm import DeclarativeBase, sessionmaker
+from sqlalchemy.orm import DeclarativeBase, sessionmaker, Session
+from typing import Annotated
+from fastapi import Depends
 
 DATABASE_URL = "sqlite:///./escola.db"
 
@@ -17,3 +19,13 @@ SessionLocal = sessionmaker(
 
 class Base(DeclarativeBase):
     pass
+
+def obter_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
+
+
+DbSession = Annotated[Session, Depends(obter_db)]
