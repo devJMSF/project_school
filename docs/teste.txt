@@ -1,0 +1,40 @@
+
+Preparar a API para produção
+
+Configurações, variáveis de ambiente, CORS, tratamento de erros e banco de dados.
+
+
+
+Migrar SQLite para PostgreSQL
+
+Preparar o banco de dados de produção e configurar Alembic para migrations.
+
+
+
+Docker
+
+Criar Dockerfile e Docker Compose para padronizar a execução.
+
+
+
+Deploy da API
+
+Publicar o FastAPI e disponibilizar o Swagger publicamente.
+
+
+
+CI/CD
+
+Automatizar testes, validações e publicação a cada atualização no GitHub.
+
+
+
+Integração com frontend
+
+Configurar URL da API, CORS e realizar as chamadas HTTP.
+
+
+
+Evolução contínua
+
+Implementar novas regras de negócio, autenticação e funcionalidades.
