@@ -1,10 +1,14 @@
-
+import os
+from dotenv import load_dotenv
 from sqlalchemy import create_engine
 from sqlalchemy.orm import DeclarativeBase, sessionmaker, Session
 from typing import Annotated
 from fastapi import Depends
 
-DATABASE_URL = "sqlite:///./escola.db"
+DATABASE_URL = os.getenv(
+    "DATABASE_URL",
+    "sqlite:///./escola.db"
+)
 
 engine = create_engine(
     DATABASE_URL,

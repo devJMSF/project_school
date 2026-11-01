@@ -1,11 +1,13 @@
 from app.schemas.professor import ProfessorCreate, ProfessorUpload, ProfessorResponse
 from app.services import professor as service
 from app.database.config import DbSession
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Depends
+from app.security.dependencies import get_current_user
 
 router_professor = APIRouter(
     prefix="/professores",
-    tags=["Professores"]
+    tags=["Professores"], 
+    dependencies=[Depends(get_current_user)]
 )
 
 @router_professor.get("/", response_model=list[ProfessorResponse])

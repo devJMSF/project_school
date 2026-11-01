@@ -1,4 +1,5 @@
 from pydantic import BaseModel, Field, EmailStr, ConfigDict
+from app.security.roles import UserRole
 
 class Usuario(BaseModel):
 
@@ -6,7 +7,7 @@ class Usuario(BaseModel):
     nome: str = Field(min_length=3, max_length=100)
     email: EmailStr
     usuario: str = Field(min_length=6, max_length=50)
-    senha: int = Field(gt=6)
+    senha: str
 
 class UsuarioCreate(BaseModel):
     
@@ -31,7 +32,8 @@ class UsuarioResponse(BaseModel):
     id: int
     nome: str = Field(min_length=3, max_length=100)
     email: EmailStr
-    usuario: str = Field(min_length=3, max_length=10)
+    usuario: str
+    perfil: UserRole
 
     model_config = ConfigDict(from_attributes=True)
 

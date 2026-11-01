@@ -1,11 +1,13 @@
 from app.database.config import DbSession
 from app.schemas.disciplina import DisciplinaCreate, DisciplinaUpdate, DisciplinaResponse
 from app.services import disciplina as service
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Depends
+from app.security.dependencies import get_current_user
 
 router_disciplina = APIRouter(
     prefix="/disciplinas",
-    tags=["Disciplinas"]
+    tags=["Disciplinas"],
+    dependencies=[Depends(get_current_user)]
 )
 
 @router_disciplina.get("/", response_model=list[DisciplinaResponse])

@@ -1,5 +1,6 @@
 from app.schemas.usuario import UsuarioCreate, UsuarioUpdate
 from app.repositories import usuario as repo
+from app.security.hashing import gerar_hash
 from sqlalchemy.orm import Session
 
 def listar_usuarios(db: Session):
@@ -9,7 +10,10 @@ def buscar_usuario(db: Session, usuario_id):
     return repo.buscar_por_id(db, usuario_id)
 
 def criar_usuario(db: Session, dados: UsuarioCreate):
-    return repo.criar(db, dados.model_dump())
+    dados_usuario =  dados.model_dump()
+    dados_usuario["senha"] = gerar_hash(dados_usuario["senha"])
+
+    return repo.criar(db, dados_usuario)
 
 def atualizar_usuario(db: Session, dados: UsuarioUpdate):
     usuario = repo.buscar_por_id(db, dados.id)

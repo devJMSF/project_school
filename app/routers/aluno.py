@@ -1,11 +1,13 @@
 from app.database.config import DbSession
 from app.schemas.aluno import AlunoCreate, AlunoUpdate, AlunoResponse
 from app.services import aluno as service
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Depends
+from app.security.dependencies import get_current_user
 
 router_alunos = APIRouter(
     prefix="/alunos", 
     tags=["Alunos"],
+    dependencies=[Depends(get_current_user)]
 )
 
 @router_alunos.get("/", response_model=list[AlunoResponse])

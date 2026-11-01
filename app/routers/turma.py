@@ -1,12 +1,13 @@
 from app.schemas.turma import TurmaResponse, TurmaCreate, TurmaUpdate
 from app.database.config import DbSession
 from app.services import turma as service
-from fastapi import HTTPException, APIRouter
-from sqlalchemy.orm import Session
+from fastapi import HTTPException, APIRouter, Depends
+from app.security.dependencies import get_current_user
 
 router_turma = APIRouter(
     prefix="/turmas",
-    tags=["Turmas"]
+    tags=["Turmas"],
+    dependencies=[Depends(get_current_user)]
 )
 
 @router_turma.get("/", response_model=list[TurmaResponse])

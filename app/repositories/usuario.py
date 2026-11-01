@@ -8,6 +8,10 @@ def listar(db: Session):
 def buscar_por_id(db: Session, usuario_id: int):
     return db.get(Usuario, usuario_id)
 
+def buscar_por_email(db: Session, usuario_email: str):
+    stmt = select(Usuario).where(Usuario.email == usuario_email)
+    return db.scalar(stmt)
+
 def criar(db: Session, dados: dict):
     usuario = Usuario(**dados)
 
