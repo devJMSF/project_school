@@ -51,3 +51,6 @@ dist/
 # Type checking
 .mypy_cache/
 .pyright/
+
+# json
+.json

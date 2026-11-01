@@ -1,7 +1,6 @@
 from app.database.config import DbSession
 from app.schemas.nota import NotaCreate, NotaUpdate, NotaResponse
 from app.services import nota as service
-from typing import Annotated
 from fastapi import APIRouter, HTTPException
 
 router_nota = APIRouter(

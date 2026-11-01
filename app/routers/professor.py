@@ -1,24 +1,12 @@
 from app.schemas.professor import ProfessorCreate, ProfessorUpload, ProfessorResponse
 from app.services import professor as service
-from app.database.config import SessionLocal
-from sqlalchemy.orm import Session
-from typing import Annotated
-from fastapi import Depends, APIRouter, HTTPException
+from app.database.config import DbSession
+from fastapi import APIRouter, HTTPException
 
 router_professor = APIRouter(
     prefix="/professores",
     tags=["Professores"]
 )
-
-def obter_db():
-    db = SessionLocal()
-
-    try:
-        yield db
-    finally:
-        db.close()
-
-DbSession = Annotated[Session, Depends(obter_db)]
 
 @router_professor.get("/", response_model=list[ProfessorResponse])
 def listar(db: DbSession):

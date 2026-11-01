@@ -1,24 +1,12 @@
-from app.database.config import SessionLocal
+from app.database.config import DbSession
 from app.schemas.aluno import AlunoCreate, AlunoUpdate, AlunoResponse
 from app.services import aluno as service
-from typing import Annotated
-from fastapi import APIRouter, Depends, HTTPException
-from sqlalchemy.orm import Session
+from fastapi import APIRouter, HTTPException
 
 router_alunos = APIRouter(
     prefix="/alunos", 
     tags=["Alunos"],
 )
-
-def obter_db():
-    db = SessionLocal()
-
-    try:
-        yield db
-    finally:
-        db.close()
-
-DbSession = Annotated[Session, Depends(obter_db)]
 
 @router_alunos.get("/", response_model=list[AlunoResponse])
 def listar(db: DbSession):

@@ -1,24 +1,12 @@
-from app.database.config import SessionLocal
+from app.database.config import DbSession
 from app.schemas.disciplina import DisciplinaCreate, DisciplinaUpdate, DisciplinaResponse
 from app.services import disciplina as service
-from typing import Annotated
-from fastapi import APIRouter, Depends, HTTPException
-from sqlalchemy.orm import Session
+from fastapi import APIRouter, HTTPException
 
 router_disciplina = APIRouter(
     prefix="/disciplinas",
     tags=["Disciplinas"]
 )
-
-def obter_db():
-    db = SessionLocal()
-
-    try:
-        yield db
-    finally:
-        db.close()
-
-DbSession = Annotated[Session, Depends(obter_db)]
 
 @router_disciplina.get("/", response_model=list[DisciplinaResponse])
 def listar(db: DbSession):
