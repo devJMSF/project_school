@@ -1,4 +1,5 @@
 from app.schemas.turma import TurmaResponse, TurmaCreate, TurmaUpdate
+from app.schemas.aluno import AlunoResponse
 from app.database.config import DbSession
 from app.services import turma as service
 from fastapi import HTTPException, APIRouter, Depends
@@ -13,6 +14,18 @@ router_turma = APIRouter(
 @router_turma.get("/", response_model=list[TurmaResponse])
 def listar(db: DbSession):
     return service.listar_turmas(db)
+
+@router_turma.get("/turmas/{turma_id}/alunos", response_model=list[AlunoResponse])
+def listar_alunos_por_turma(turma_id: int , db: DbSession):
+    alunos = service.listar_alunos_por_turma(db, turma_id)
+
+    if alunos is None:
+        raise HTTPException(
+            status_code=404,
+            detail="turma não encontrada"
+        )
+    
+    return alunos
 
 @router_turma.get("/{turma_id}",response_model=TurmaResponse)
 def buscar(turma_id: int, db: DbSession):

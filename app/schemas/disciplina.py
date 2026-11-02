@@ -1,4 +1,5 @@
 from pydantic import BaseModel, Field, ConfigDict
+from app.schemas.nota import Nota
 
 class Disciplina(BaseModel):
 

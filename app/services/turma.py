@@ -8,6 +8,14 @@ def listar_turmas(db: Session):
 def buscar_turma(db: Session, turma_id: int):
     return repo.buscar_por_id(db, turma_id)
 
+def listar_alunos_por_turma(db: Session, turma_id: int):
+    turma = repo.buscar_por_id(db, turma_id)
+
+    if not turma:
+        return None
+    
+    return repo.listar_alunos_por_turma(db, turma_id)
+
 def criar_turma(db: Session, dados: TurmaCreate):
     return repo.criar(db, dados.model_dump())
 

@@ -14,6 +14,31 @@ router_professor = APIRouter(
 def listar(db: DbSession):
     return service.listar_professores(db)
 
+@router_professor.get("/{professor_id}", response_model=ProfessorResponse)
+def buscar(professor_id: int, db: DbSession):
+    professor = service.buscar_professor(db, professor_id)
+
+    if not professor:
+        raise HTTPException(
+            status_code=404, 
+            detail="processor não encontrado"
+        )
+    
+    return professor
+
+@router_professor.get("/cpf/{professor_cpf}", response_model=ProfessorResponse)
+def buscar_cpf(professor_cpf: str, db: DbSession):
+    professor = service.buscar_professor_por_cpf(db, professor_cpf)
+
+    if not professor:
+        raise HTTPException(
+            status_code=404, 
+            detail="processor não encontrado"
+        )
+    
+    return professor
+
+
 @router_professor.post("/", status_code=201)
 def criar(dados: ProfessorCreate, db: DbSession):
     return service.criar_professor(db, dados)
@@ -40,16 +65,5 @@ def atualizar(dados: ProfessorUpload, db: DbSession):
 
     return professor
 
-@router_professor.get("/{professor_id}", response_model=ProfessorResponse)
-def buscar(professor_id: int, db: DbSession):
-    professor = service.buscar_professor(db, professor_id)
-
-    if not professor:
-        raise HTTPException(
-            status_code=404, 
-            detail="processor não encontrado"
-        )
-    
-    return professor
 
 

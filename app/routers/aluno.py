@@ -26,6 +26,18 @@ def buscar(aluno_id: int, db: DbSession):
 
     return aluno
 
+@router_alunos.get("/cpf/{aluno_cpf}", response_model=AlunoResponse)
+def buscar_cpf(aluno_cpf: str, db: DbSession):
+    aluno = service.buscar_aluno_por_cpf(db, aluno_cpf)
+
+    if not aluno:
+        raise HTTPException(
+            status_code=404,
+            detail="aluno não encontrado"
+        )
+
+    return aluno
+
 @router_alunos.post("/", response_model=AlunoResponse)
 def criar(dados: AlunoCreate, db: DbSession):
     return service.criar_aluno(db, dados)

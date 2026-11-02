@@ -8,6 +8,9 @@ def listar_alunos(db: Session):
 def buscar_aluno(db: Session, aluno_id: int):
     return repo.buscar_por_id(db, aluno_id)
 
+def buscar_aluno_por_cpf(db: Session, aluno_cpf: str):
+    return repo.buscar_por_cpf(db, aluno_cpf)
+
 def criar_aluno(db: Session, dados: AlunoCreate):
     return repo.criar(
         db, 

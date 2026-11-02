@@ -8,6 +8,9 @@ def listar_professores(db: Session):
 def buscar_professor(db: Session, professor_id: int):
     return repo.buscar_por_id(db, professor_id)
 
+def buscar_professor_por_cpf(db: Session, professor_cpf: str):
+    return repo.buscar_por_cpf(db, professor_cpf)
+
 def criar_professor(db: Session, dados: ProfessorCreate):
     return repo.criar(db, dados.model_dump())
 

@@ -8,6 +8,10 @@ def listar(db: Session):
 def buscar_por_id(db: Session, aluno_id: int):
     return db.get(Aluno, aluno_id)
 
+def buscar_por_cpf(db: Session, aluno_cpf: str):
+    aluno = select(Aluno).where(Aluno.cpf == aluno_cpf)
+    return db.scalar(aluno)
+
 def criar(db: Session, dados: dict):
     aluno = Aluno(**dados)
 
